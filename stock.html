@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>在庫管理指標計算</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+  <h1>在庫管理指標計算</h1>
+
+  <label for="initialStock">初期在庫数量：</label>
+  <input type="number" id="initialStock" required><br>
+
+  <label for="endStock">期末在庫数量：</label>
+  <input type="number" id="endStock" required><br>
+
+  <label for="salesRevenue">売上高：</label>
+  <input type="number" id="salesRevenue" required><br>
+
+  <button onclick="calculateIndices()">計算</button>
+
+  <h2>計算結果</h2>
+  <p>平均在庫数量： <span id="averageStock"></span></p>
+  <p>在庫回転数： <span id="inventoryTurnover"></span></p>
+  <p>在庫回転日数： <span id="daysSalesOfInventory"></span></p>
+
+  <script>
+    function calculateIndices() {
+        const initialStock = parseFloat(document.getElementById('initialStock').value);
+        const endStock = parseFloat(document.getElementById('endStock').value);
+        const salesRevenue = parseFloat(document.getElementById('salesRevenue').value);
+
+        // 平均在庫の計算
+        const averageStock = (initialStock + endStock) / 2;
+        document.getElementById('averageStock').innerText = averageStock.toFixed(2);
+
+      // 在庫回転数の計算
+        const inventoryTurnover = salesRevenue / averageStock;
+        document.getElementById('inventoryTurnover').innerText = inventoryTurnover.toFixed(2);
+
+      // 在庫回転日数の計算
+        const daysSalesOfInventory = 365 / inventoryTurnover;
+        document.getElementById('daysSalesOfInventory').innerText = daysSalesOfInventory.toFixed(2);
+    }
+  </script>
+</body>
+</html>
